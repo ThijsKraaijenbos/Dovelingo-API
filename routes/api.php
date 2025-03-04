@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 //})->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function () {
-    Route::get('/users', [ExerciseController::class, 'index']);
+    Route::get('/exercises', [ExerciseController::class, 'index']);
 });
