@@ -11,13 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
+//        Default user schema from laravel (removed because ours is better)
+//        Schema::create('users', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('name');
+//            $table->string('email')->unique();
+//            $table->timestamp('email_verified_at')->nullable();
+//            $table->string('password');
+//            $table->rememberToken();
+//            $table->timestamps();
+//        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('display_name')->unique();
+            $table->string('full_name');
             $table->string('email')->unique();
+            $table->string('sso_token');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->bigInteger('batch_id');
+            $table->foreign('batch_id')->references('id')->on('batches');
+            $table->string('role');
             $table->rememberToken();
+            $table->bigInteger('score');
             $table->timestamps();
         });
 
@@ -35,6 +53,8 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
