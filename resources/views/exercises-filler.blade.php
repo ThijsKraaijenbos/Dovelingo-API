@@ -2,6 +2,11 @@
     @csrf
     <label for="files">Choose files:</label>
     <input type="file" name="files[]" id="files" multiple accept="video/mp4" />
+    <select name="lesson_id" id="lesson_id">
+        @foreach($lessons as $lesson)
+            <option value={{$lesson->id}}>{{$lesson->lesson_name}}</option>
+        @endforeach
+    </select>
     <input type="submit" value="Upload">
 </form>
 

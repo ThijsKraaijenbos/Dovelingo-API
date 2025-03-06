@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lesson;
 use App\Models\Word;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ExercisesFiller extends Controller
 {
     public function index()
     {
-        return view('exercises-filler');
+        $lessons = Lesson::all();
+        return view('exercises-filler', compact('lessons'));
     }
 
     /**
@@ -22,10 +24,12 @@ class ExercisesFiller extends Controller
         $request->validate([
             'files' => 'required|array|min:1', // Ensure that at least one file is uploaded
             'files.*' => 'file|mimes:mp4', // Example validation rules
+            'lesson_id' => 'required'
         ]);
 
         // Initialize an array to hold the file paths
         $uploadedFiles = [];
+        $lessonId = $request->lesson_id;
 
         // Check if files were uploaded
         if ($request->hasFile('files')) {
@@ -41,7 +45,7 @@ class ExercisesFiller extends Controller
                 Word::create([
                     'title' => pathinfo($originalFileName, PATHINFO_FILENAME), // Store name without extension
                     'video_path' => $path, // Store the file path
-                    'lesson_id' => null,
+                    'lesson_id' => $lessonId,
                 ]);
             }
 
