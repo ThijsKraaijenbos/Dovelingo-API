@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\ExercisesFiller;
-use App\Http\Controllers\ApiKeysController;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,7 +12,8 @@ Route::get('/', function () {
 Route::get('/filler', [ExercisesFiller::class, 'index'])->name('filler.index');
 Route::post('/filler', [ExercisesFiller::class, 'store'])->name('filler.store');
 
+Route::get('/api-user/login', [ApiAuthController::class, 'showLoginForm'])->name('api-user.showLoginForm');
+Route::post('/api-user/login', [ApiAuthController::class, 'login'])->name('api-user.login');
 
-Route::get('/tokens/create', [ApiKeysController::class, 'index'])->name('tokens.index');
-Route::post('/tokens/create', [ApiKeysController::class, 'generateToken'])->name('tokens.generate');
-
+Route::get('/api-user/register', [ApiUserController::class, 'showRegistrationForm']);
+Route::post('/api-user/register', [ApiUserController::class, 'register']);
