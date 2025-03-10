@@ -9,22 +9,26 @@
     </div>
 </nav>
 <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold text-gray-700 text-center">Register API User</h2>
+    <h2 class="text-2xl font-semibold text-gray-700 text-center">Check API Token</h2>
 
-    @if(session('success'))
-        <div class="bg-green-100 text-green-700 p-2 mt-4 rounded">
-            {{ session('success') }}
+    @if(session('error'))
+        <div class="bg-red-100 text-red-700 p-2 mt-4 rounded">
+            {{ session('error') }}
         </div>
     @endif
 
-    <form action="{{ route('api-user.register') }}" method="POST" class="mt-4">
-        @csrf
-        <div class="mb-4">
-            <label class="block text-gray-700">Name</label>
-            <input type="text" name="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" required>
-            @error('name') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+    @if(session('token'))
+        <div class="bg-green-100 text-green-700 p-2 mt-4 rounded break-all">
+            <h1>Your API Token:</h1> <br>
+            <code>{{ session('token') }}</code>
+            @if(session('token_first'))
+            <h1 class="text-red"><b>BELANGRIJK: Je krijgt deze token maar ÉÉN KEER Als je je token kwijt raakt, vraag Thijs voor een nieuwe</b></h1>
+            @endif
         </div>
+    @endif
 
+    <form action="{{ route('api-user.checkToken') }}" method="POST" class="mt-4">
+        @csrf
         <div class="mb-4">
             <label class="block text-gray-700">Email</label>
             <input type="email" name="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" required>
@@ -37,9 +41,16 @@
             @error('password') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
         </div>
 
-        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-            Register
-        </button>
+        <div class="flex flex-col justify-center items-center space-y-1">
+            <button type="submit" value="true" name="checkToken" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+                Login & Get API Token
+            </button>
+            <h1>OR</h1>
+            <button type="submit" value="true" name="generateNewToken" class="w-full bg-blue-500 text-white text-center py-2 rounded-lg hover:bg-blue-600 transition">
+                Generate New Token<br>
+                <span class="text-xs">(Only use if you've lost your previous token)</span>
+            </button>
+        </div>
     </form>
 </div>
 </body>

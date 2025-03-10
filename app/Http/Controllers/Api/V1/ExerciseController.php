@@ -16,9 +16,10 @@ ExerciseController extends Controller
 //        Example code to return an example version of the Exercises table
 //        Make sure there's a model for it and a migration of course
 //        $exercises = Exercises::all();
-//        return response()->json([
+        return response()->json([
 //            'collection' => $exercises
-//        ]);
+            'collection' => "This is an example collection"
+        ]);
     }
 
     /**

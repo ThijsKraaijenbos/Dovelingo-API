@@ -12,8 +12,8 @@ Route::get('/', function () {
 Route::get('/filler', [ExercisesFiller::class, 'index'])->name('filler.index');
 Route::post('/filler', [ExercisesFiller::class, 'store'])->name('filler.store');
 
-Route::get('/api-user/login', [ApiAuthController::class, 'showLoginForm'])->name('api-user.showLoginForm');
-Route::post('/api-user/login', [ApiAuthController::class, 'login'])->name('api-user.login');
+Route::get('/api-user/check-token', [ApiAuthController::class, 'showCheckTokenForm'])->name('api-user.showCheckTokenForm');
+Route::post('/api-user/check-token', [ApiAuthController::class, 'checkToken'])->name('api-user.checkToken');
 
 Route::get('/api-user/register', [ApiUserController::class, 'showRegistrationForm'])->name('api-user.showRegisterForm');
 Route::post('/api-user/register', [ApiUserController::class, 'register'])->name('api-user.register');
