@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    <form action="{{ url('/register-api-user') }}" method="POST" class="mt-4">
+    <form action="{{ route('api-user.register') }}" method="POST" class="mt-4">
         @csrf
         <div class="mb-4">
             <label class="block text-gray-700">Name</label>

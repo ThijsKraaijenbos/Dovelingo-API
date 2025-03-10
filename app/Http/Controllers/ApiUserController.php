@@ -29,6 +29,6 @@ class ApiUserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/register-api-user')->with('success', 'API User created successfully');
+        return back()->with('success', 'API User created successfully');
     }
 }
