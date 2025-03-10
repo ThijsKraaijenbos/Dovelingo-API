@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ExercisesFiller;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiUserController;
+use App\Http\Controllers\LetterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,6 @@ Route::post('/api-user/check-token', [ApiAuthController::class, 'checkToken'])->
 
 Route::get('/api-user/register', [ApiUserController::class, 'showRegistrationForm'])->name('api-user.showRegisterForm');
 Route::post('/api-user/register', [ApiUserController::class, 'register'])->name('api-user.register');
+
+Route::get('/letters', [LetterController::class, 'index'])->name('letters.index');
+Route::post('/letters', [LetterController::class, 'store'])->name('letters.store');
