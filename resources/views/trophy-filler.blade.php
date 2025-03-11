@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload trophies</title>
+    <title>Upload trophy</title>
 </head>
 <body>
 <h1>Upload van trophies en scores</h1>
