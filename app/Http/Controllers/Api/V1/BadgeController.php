@@ -46,7 +46,7 @@ class BadgeController extends Controller
     public function getUserBadges(Request $request)
     {
 
-        $ssoToken = $request->header('Authorization');
+        $ssoToken = $request->query('token');
 
         if (!$ssoToken) {
             return response()->json(['error' => 'SSO token is missing'], 401);
