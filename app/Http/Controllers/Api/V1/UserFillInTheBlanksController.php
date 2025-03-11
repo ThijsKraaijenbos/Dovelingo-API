@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\UserFillInTheBlanks;
 use App\Models\UserWord;
-use App\Models\Word;
 use Illuminate\Http\Request;
 
-class UserWordController extends Controller
+class UserFillInTheBlanksController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $userWords = UserWord::all();
-        return response()->json($userWords);
+        $userFillInTheBlanks = UserFillInTheBlanks::all();
+        return response()->json($userFillInTheBlanks);
     }
 
     /**
@@ -24,7 +23,7 @@ class UserWordController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -33,11 +32,11 @@ class UserWordController extends Controller
     public function store(Request $request)
     {
         $completed = $request->completed;
-        $wordId = $request->word_id;
+        $fillInTheBlanksId = $request->fill_in_the_blanks_id;
 
         $userWord = UserWord::create([
             'user_id' => auth()->user()->id,
-            'word_id' => $wordId,
+            'fill_in_the_blanks_id' => $fillInTheBlanksId,
             'completed' => $completed
         ]);
     }
@@ -45,7 +44,7 @@ class UserWordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserWord $userWord)
+    public function show(UserFillInTheBlanks $userFillInTheBlanks)
     {
         //
     }
@@ -53,7 +52,7 @@ class UserWordController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserWord $userWord)
+    public function edit(UserFillInTheBlanks $userFillInTheBlanks)
     {
         //
     }
@@ -61,7 +60,7 @@ class UserWordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserWord $userWord)
+    public function update(Request $request, UserFillInTheBlanks $userFillInTheBlanks)
     {
         //
     }
@@ -69,7 +68,7 @@ class UserWordController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserWord $userWord)
+    public function destroy(UserFillInTheBlanks $userFillInTheBlanks)
     {
         //
     }

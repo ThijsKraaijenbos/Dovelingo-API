@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(UserWord::class);
     }
+
+    public function userFillInTheBlanks(): BelongsToMany
+    {
+        return $this->belongsToMany(UserFillInTheBlanks::class);
+    }
+
+    public function userSentenceBuilding(): BelongsToMany
+    {
+        return $this->belongsToMany(UserSentenceBuilding::class);
+    }
 }
