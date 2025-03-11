@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Models\SentenceBuilding;
-use App\Models\Word;
-use Illuminate\Http\Request;
 
 class SentenceBuildingController extends Controller
 {
