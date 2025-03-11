@@ -45,8 +45,6 @@ class UserFillInTheBlanksController extends Controller
         } else {
             return response()->json("this sentence doesn't exist");
         }
-
-
     }
 
     /**

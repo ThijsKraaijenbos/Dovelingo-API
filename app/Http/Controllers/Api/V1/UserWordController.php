@@ -43,8 +43,6 @@ class UserWordController extends Controller
         } else {
             return response()->json("this word doesn't exist");
         }
-
-
     }
 
     /**
