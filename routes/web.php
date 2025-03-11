@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ExercisesFiller;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\TrophyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,8 @@ Route::post('/api-user/register', [ApiUserController::class, 'register'])->name(
 
 Route::get('/letters', [LetterController::class, 'index'])->name('letters.index');
 Route::post('/letters', [LetterController::class, 'store'])->name('letters.store');
+
+Route::get('/trophies', [TrophyController::class, 'index'])->name('trophies.index');
+Route::post('/trophies', [TrophyController::class, 'store'])->name('trophies.store');
+
+
