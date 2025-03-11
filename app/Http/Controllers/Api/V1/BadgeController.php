@@ -43,13 +43,22 @@ class BadgeController extends Controller
         ]);
     }
 
-    public function getUserBadges()
+    public function getUserBadges(Request $request)
     {
-        $user = Auth::user();
+
+        $ssoToken = $request->header('Authorization');
+
+        if (!$ssoToken) {
+            return response()->json(['error' => 'SSO token is missing'], 401);
+        }
+
+
+        $user = User::where('sso_token', $ssoToken)->first();
 
         if (!$user) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
 
         $badges = UserBadge::where('user_id', $user->id)
             ->with('badge')
@@ -61,4 +70,5 @@ class BadgeController extends Controller
             'badges' => $badges
         ]);
     }
+
 }
