@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\UserWord;
 use App\Models\Word;
 use Illuminate\Http\Request;
@@ -35,11 +34,17 @@ class UserWordController extends Controller
         $completed = $request->completed;
         $wordId = $request->word_id;
 
-        $userWord = UserWord::create([
-            'user_id' => auth()->user()->id,
-            'word_id' => $wordId,
-            'completed' => $completed
-        ]);
+        if(Word::where('id', $wordId)->exists()) {
+            $userWord = UserWord::create([
+                'user_id' => 1,
+                'word_id' => $wordId,
+                'completed' => $completed
+            ]);
+        } else {
+            return response()->json("this word doesn't exist");
+        }
+
+
     }
 
     /**

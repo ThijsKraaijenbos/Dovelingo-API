@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\FillInTheBlanks;
 use App\Models\UserFillInTheBlanks;
 use App\Models\UserWord;
 use Illuminate\Http\Request;
@@ -34,11 +35,18 @@ class UserFillInTheBlanksController extends Controller
         $completed = $request->completed;
         $fillInTheBlanksId = $request->fill_in_the_blanks_id;
 
-        $userWord = UserWord::create([
-            'user_id' => auth()->user()->id,
-            'fill_in_the_blanks_id' => $fillInTheBlanksId,
-            'completed' => $completed
-        ]);
+        if(FillInTheBlanks::where('id', $fillInTheBlanksId)->exists()) {
+            $userFillInTheBlanks = UserFillInTheBlanks::create([
+                'user_id' => 1,
+//            'user_id' => auth()->user()->id,
+                'fill_in_the_blanks_id' => $fillInTheBlanksId,
+                'completed' => $completed
+            ]);
+        } else {
+            return response()->json("this sentence doesn't exist");
+        }
+
+
     }
 
     /**

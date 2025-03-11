@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserSentenceBuilding extends Model
 {
-    protected $table = 'user_words';
+    protected $table = 'user_sentence_building';
 
     protected $fillable = [
         'user_id',
