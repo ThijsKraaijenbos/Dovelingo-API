@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\SentenceBuilding;
+use App\Models\User;
 use App\Models\UserSentenceBuilding;
 use App\Models\UserWord;
 use Illuminate\Http\Request;
@@ -34,14 +35,16 @@ class UserSentenceBuildingController extends Controller
     {
         $completed = $request->completed;
         $sentenceBuildingId = $request->sentence_building_id;
+        $user = User::where('sso_token', $request->query('token'))->first();
 
-        if(SentenceBuilding::where('sentence_building_id', $sentenceBuildingId)->exists()) {
+        if(SentenceBuilding::where('id', $sentenceBuildingId)->exists()) {
             $userSentenceBuilding = UserSentenceBuilding::create([
-                'user_id' => 1,
-//            'user_id' => auth()->user()->id,
+                'user_id' => $user->id,
                 'sentence_building_id' => $sentenceBuildingId,
                 'completed' => $completed
             ]);
+
+            return response()->json($userSentenceBuilding);
         } else {
             return response()->json("this sentence doesn't exist");
         }
