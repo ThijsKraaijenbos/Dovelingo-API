@@ -2,10 +2,9 @@
 
 use App\Http\Controllers\Api\ExercisesFiller;
 use App\Http\Controllers\Api\V1\LetterController;
+use App\Http\Controllers\Api\V1\TrophyController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiUserController;
-use App\Http\Controllers\LetterController;
-use App\Http\Controllers\TrophyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
