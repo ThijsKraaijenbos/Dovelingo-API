@@ -35,7 +35,7 @@ return new class extends Migration
             $table->foreign('batch_id')->references('id')->on('batches');
             $table->string('role');
             $table->rememberToken();
-            $table->bigInteger('score');
+            $table->bigInteger('score')->default(0);
             $table->timestamps();
         });
 

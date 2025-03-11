@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\BadgeController;
 use App\Http\Controllers\Api\V1\ExerciseController;
 use App\Http\Controllers\ApiAuthController;
 use Illuminate\Support\Facades\Route;
@@ -14,5 +15,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //V1 API Routes
     Route::prefix('v1')->group(function () {
         Route::get('/exercises', [ExerciseController::class, 'index']);
+        Route::post('/update-points', [BadgeController::class, 'updatePoints']);
     });
 });
