@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //SSO Auth Route
-Route::get('/auth/redirect-back-url/{redirect}/', [SSOAuthController::class, 'login']);
+Route::get('/auth/redirect-back-url/{redirect}/', [SSOAuthController::class, 'login'])->middleware(\App\Http\Middleware\UpdateStreak::class);
 
 //Api Key middleware
 Route::middleware('auth:sanctum')->group(function () {
