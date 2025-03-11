@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('/exercises', [ExerciseController::class, 'index']);
         Route::get('/words',[WordsController::class, 'getData']);
+        Route::get('/user-words', [\App\Http\Controllers\Api\V1\UserWordController::class, 'index']);
     });
 });
 
