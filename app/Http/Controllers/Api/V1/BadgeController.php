@@ -41,4 +41,24 @@ class BadgeController extends Controller
             'new_badges' => $earnedBadges
         ]);
     }
+
+    public function getUserBadges($userId)
+    {
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+
+        $badges = UserBadge::where('user_id', $userId)
+            ->with('badge')
+            ->get()
+            ->pluck('badge');
+
+        return response()->json([
+            'user_id' => $userId,
+            'badges' => $badges
+        ]);
+    }
 }
