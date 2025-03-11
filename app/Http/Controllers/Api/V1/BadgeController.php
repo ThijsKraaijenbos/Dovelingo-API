@@ -7,6 +7,7 @@ use App\Models\Badge;
 use App\Models\User;
 use App\Models\UserBadge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BadgeController extends Controller
 {
@@ -42,22 +43,21 @@ class BadgeController extends Controller
         ]);
     }
 
-    public function getUserBadges($userId)
+    public function getUserBadges()
     {
-        $user = User::find($userId);
+        $user = Auth::user();
 
         if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-
-        $badges = UserBadge::where('user_id', $userId)
+        $badges = UserBadge::where('user_id', $user->id)
             ->with('badge')
             ->get()
             ->pluck('badge');
 
         return response()->json([
-            'user_id' => $userId,
+            'user_id' => $user->id,
             'badges' => $badges
         ]);
     }
