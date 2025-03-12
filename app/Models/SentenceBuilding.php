@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class SentenceBuilding extends Model
 {
@@ -18,5 +19,10 @@ class SentenceBuilding extends Model
     public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    public function userSentenceBuilding(): BelongsToMany
+    {
+        return $this->belongsToMany(UserSentenceBuilding::class);
     }
 }

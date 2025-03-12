@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,5 +55,20 @@ class User extends Authenticatable
     public function badges()
     {
         return $this->belongsToMany(Badge::class, 'user_badges', 'user_id', 'badge_id');
+    }
+
+    public function userWord(): BelongsToMany
+    {
+        return $this->belongsToMany(UserWord::class);
+    }
+
+    public function userFillInTheBlanks(): BelongsToMany
+    {
+        return $this->belongsToMany(UserFillInTheBlanks::class);
+    }
+
+    public function userSentenceBuilding(): BelongsToMany
+    {
+        return $this->belongsToMany(UserSentenceBuilding::class);
     }
 }
