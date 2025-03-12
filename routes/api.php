@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/badges', [BadgeController::class, 'getAllBadges']);
         Route::get('/lessons', [LessonController::class, 'index']);
         Route::get('/words',[WordsController::class, 'getData']);
+
         Route::get('/sentence-building',[SentenceBuildingController::class, 'getData']);
         Route::get('/fill-in-the-blanks',[FillInTheBlanksController::class, 'getData']);
         Route::get('/gifs',[GifsController::class, 'getData']);
