@@ -43,9 +43,9 @@ class UserWordController extends Controller
                 'completed' => $completed
             ]);
 
-            return response()->json($userWord);
+            return response()->json($userWord, status: 201);
         } else {
-            return response()->json("this word doesn't exist");
+            return response()->json("this word doesn't exist", status: 404);
         }
     }
 
@@ -68,9 +68,21 @@ class UserWordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserWord $userWord)
+    public function update(Request $request)
     {
-        //
+        $completed = $request->completed;
+        $userWordId = $request->user_word_id;
+        $userWord = UserWord::where('id', $userWordId)->first();
+
+        if(UserWord::where('id', $userWordId)->exists()) {
+            $userWord->update([
+                'completed' => $completed
+            ]);
+
+            return response()->json($userWord, status: 200);
+        } else {
+            return response()->json("this user hasnt made this exercise before", status: 404);
+        }
     }
 
     /**

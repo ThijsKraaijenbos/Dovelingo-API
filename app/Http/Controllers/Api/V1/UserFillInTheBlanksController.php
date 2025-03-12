@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FillInTheBlanks;
 use App\Models\User;
 use App\Models\UserFillInTheBlanks;
+use App\Models\UserSentenceBuilding;
 use App\Models\UserWord;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,9 @@ class UserFillInTheBlanksController extends Controller
                 'completed' => $completed
             ]);
 
-            return response()->json($userFillInTheBlanks);
+            return response()->json($userFillInTheBlanks, status: 201);
         } else {
-            return response()->json("this sentence doesn't exist");
+            return response()->json("this sentence doesn't exist", status: 404);
         }
     }
 
@@ -69,9 +70,21 @@ class UserFillInTheBlanksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserFillInTheBlanks $userFillInTheBlanks)
+    public function update(Request $request)
     {
-        //
+        $completed = $request->completed;
+        $userFillInTheBlanksId = $request->user_sentence_building_id;
+        $userFillInTheBlanks = UserFillInTheBlanks::where('id', $userFillInTheBlanksId)->first();
+
+        if(UserFillInTheBlanks::where('id', $userFillInTheBlanksId)->exists()) {
+            $userFillInTheBlanks->update([
+                'completed' => $completed
+            ]);
+
+            return response()->json($userFillInTheBlanks, status: 200);
+        } else {
+            return response()->json("this user hasnt made this exercise before", status: 404);
+        }
     }
 
     /**

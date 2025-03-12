@@ -44,9 +44,9 @@ class UserSentenceBuildingController extends Controller
                 'completed' => $completed
             ]);
 
-            return response()->json($userSentenceBuilding);
+            return response()->json($userSentenceBuilding, status: 201);
         } else {
-            return response()->json("this sentence doesn't exist");
+            return response()->json("this sentence doesn't exist", status: 404);
         }
     }
 
@@ -69,9 +69,21 @@ class UserSentenceBuildingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserSentenceBuilding $userSentenceBuilding)
+    public function update(Request $request)
     {
-        //
+        $completed = $request->completed;
+        $userSentenceBuildingId = $request->user_sentence_building_id;
+        $userSentenceBuilding = UserSentenceBuilding::where('id', $userSentenceBuildingId)->first();
+
+        if(UserSentenceBuilding::where('id', $userSentenceBuildingId)->exists()) {
+            $userSentenceBuilding->update([
+                'completed' => $completed
+            ]);
+
+            return response()->json($userSentenceBuilding, status: 200);
+        } else {
+            return response()->json("this user hasnt made this exercise before", status: 404);
+        }
     }
 
     /**
