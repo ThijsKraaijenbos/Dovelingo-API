@@ -32,7 +32,7 @@ class FillInTheBlanksController extends Controller
             ->get();
 
         if ($fillInTheBlanks->isEmpty()) {
-            return response()->json(['error' => 'No data found'], 404);
+            return response()->json(['This user has not made any fill in the blanks exercises yet'], 404);
         } else {
             return response()->json($fillInTheBlanks);
         }
@@ -59,11 +59,12 @@ class FillInTheBlanksController extends Controller
                 'user_id' => $user->id,
                 'fill_in_the_blanks_id' => $fillInTheBlanksdId,
                 'completed' => $completed
-            ]);
+            ])->with('fillInTheBlanks')
+                ->get();
 
             return response()->json($userWord, status: 201);
         } else {
-            return response()->json("this word doesn't exist", status: 404);
+            return response()->json("This fill in the blanks exercise doesn't exist", status: 404);
         }
     }
 
@@ -89,9 +90,9 @@ class FillInTheBlanksController extends Controller
                 'completed' => $completed
             ]);
 
-            return response()->json($userFillInTheBlanks, status: 200);
+            return response()->json($userFillInTheBlanks->with('fillInTheBlanks')->get(), status: 200);
         } else {
-            return response()->json("this user hasnt made this exercise before", status: 404);
+            return response()->json("This user hasn't made this exercise before", status: 404);
         }
     }
 }

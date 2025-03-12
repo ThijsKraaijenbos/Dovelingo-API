@@ -40,7 +40,7 @@ class WordsController extends Controller
             ->get();
 
         if($words->isEmpty()) {
-            return response()->json(['error' => 'No data found'], 404);
+            return response()->json(['This user has not made any word exercises yet'], 404);
         } else {
             return response()->json($words);
         }
@@ -67,11 +67,12 @@ class WordsController extends Controller
                 'user_id' => $user->id,
                 'word_id' => $wordId,
                 'completed' => $completed
-            ]);
+            ])->with('word')
+                ->get();;
 
             return response()->json($userWord, status: 201);
         } else {
-            return response()->json("this word doesn't exist", status: 404);
+            return response()->json("This word doesn't exist", status: 404);
         }
 
     }
@@ -98,9 +99,9 @@ class WordsController extends Controller
                 'completed' => $completed
             ]);
 
-            return response()->json($userWord, status: 200);
+            return response()->json($userWord->with('word')->get(), status: 200);
         } else {
-            return response()->json("this user hasnt made this exercise before", status: 404);
+            return response()->json("This user hasn't made this exercise before", status: 404);
         }
     }
 

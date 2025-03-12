@@ -21,8 +21,8 @@ class SentenceBuilding extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-    public function userSentenceBuilding(): BelongsToMany
+    public function users()
     {
-        return $this->belongsToMany(UserSentenceBuilding::class);
+        return $this->belongsToMany(User::class, 'user_words', 'word_id', 'user_id');
     }
 }

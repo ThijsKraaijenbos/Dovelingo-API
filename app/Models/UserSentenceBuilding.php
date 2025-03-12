@@ -19,9 +19,4 @@ class UserSentenceBuilding extends Model
     {
         return $this->belongsTo(SentenceBuilding::class);
     }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
