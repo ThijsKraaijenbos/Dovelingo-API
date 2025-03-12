@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AlphabetLetterController;
 use App\Http\Controllers\Api\V1\BadgeController;
 use App\Http\Controllers\Api\V1\ExerciseController;
 use App\Http\Controllers\Api\V1\SSOAuthController;
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/sentence-building',[SentenceBuildingController::class, 'getData']);
         Route::get('/fill-in-the-blanks',[FillInTheBlanksController::class, 'getData']);
         Route::get('/gifs',[GifsController::class, 'getData']);
+        Route::get('/alphabet-letters', [AlphabetLetterController::class, 'index']);
 
         Route::get('/user-words', [\App\Http\Controllers\Api\V1\UserWordController::class, 'index']);
         Route::post('/user-words', [\App\Http\Controllers\Api\V1\UserWordController::class, 'store']);
@@ -39,7 +41,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user-fill-in-the-blanks', [\App\Http\Controllers\Api\V1\UserFillInTheBlanksController::class, 'index']);
         Route::post('/user-fill-in-the-blanks', [\App\Http\Controllers\Api\V1\UserFillInTheBlanksController::class, 'store']);
         Route::patch('/user-fill-in-the-blanks', [\App\Http\Controllers\Api\V1\UserFillInTheBlanksController::class, 'update']);
-
 
         Route::get('/user-sentence-building', [\App\Http\Controllers\Api\V1\UserSentenceBuildingController::class, 'index']);
         Route::post('/user-sentence-building', [\App\Http\Controllers\Api\V1\UserSentenceBuildingController::class, 'store']);
