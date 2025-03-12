@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AllowedUsersController;
 use App\Http\Controllers\Api\ExercisesFiller;
 use App\Http\Controllers\Api\V1\LetterController;
 use App\Http\Controllers\Api\V1\TrophyController;
@@ -26,4 +27,7 @@ Route::post('/letters', [LetterController::class, 'store'])->name('letters.store
 Route::get('/trophies', [TrophyController::class, 'index'])->name('trophies.index');
 Route::post('/trophies', [TrophyController::class, 'store'])->name('trophies.store');
 
-
+Route::get('/emails', function () {
+    return view('email');
+})->name('emails.create');
+Route::post('/emails', [AllowedUsersController::class, 'store'])->name('emails.store');
