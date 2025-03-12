@@ -12,8 +12,14 @@ class FillInTheBlanksController extends Controller
 {
     public function getData()
     {
-        $blank = FillInTheBlanks::all();
-        return response()->json($blank);
+        $fillInTheBlanks = FillInTheBlanks::all();
+
+        $fillInTheBlanks->transform(function ($singleFillInTheBlanks) {
+            $singleFillInTheBlanks->image_url = env('APP_URL') . '/storage/' . $singleFillInTheBlanks->sign;
+            return $singleFillInTheBlanks;
+        });
+
+        return response()->json($fillInTheBlanks);
     }
 
     public function getUserFillInTheBlanks(Request $request)

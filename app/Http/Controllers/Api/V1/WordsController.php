@@ -17,10 +17,22 @@ class WordsController extends Controller
 
         if($lesson_id == null) {
             $words = Word::all();
+
+            $words->transform(function ($word) {
+                $word->gif_path = env('APP_URL') . '/storage/' . $word->gif_path;
+                return $word;
+            });
+
             return response()->json($words);
+
         } else {
-            $words = Word::where('lesson_id', $lesson_id)->get();
-            return response()->json($words);
+            $word = Word::where('lesson_id', $lesson_id)->get();
+            $word->transform(function ($word) {
+                $word->gif_path = env('APP_URL') . '/storage/' . $word->gif_path;
+                return $word;
+            });
+
+            return response()->json($word);
         }
     }
 
