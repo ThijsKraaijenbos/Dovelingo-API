@@ -34,7 +34,6 @@ class SSOAuthController extends Controller
                 'full_name' => $requestData['name'],
                 'email' => $requestData['email'],
                 'sso_token' => $requestData['token'],
-                'batch_id' => 1,
                 'role' => "student",
                 'score' => 0,
                 'streak' => 0,
