@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/exercises', [ExerciseController::class, 'index']);
         Route::post('/update-points', [BadgeController::class, 'updatePoints']);
         Route::get('/user/badges', [BadgeController::class, 'getUserBadges']);
+        Route::get('/badges', [BadgeController::class, 'getAllBadges']);
         Route::get('/words',[WordsController::class, 'getData']);
         Route::get('/sentence-building',[SentenceBuildingController::class, 'getData']);
         Route::get('/fill-in-the-blanks',[FillInTheBlanksController::class, 'getData']);

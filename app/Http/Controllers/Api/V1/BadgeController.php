@@ -71,4 +71,9 @@ class BadgeController extends Controller
         ]);
     }
 
+    public function getAllBadges(){
+        $badges = Badge::all();
+        return response()->json($badges);
+    }
+
 }
