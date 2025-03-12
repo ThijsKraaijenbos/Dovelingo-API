@@ -71,4 +71,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(UserSentenceBuilding::class);
     }
+
+//    public function userAlphabetLetter(): BelongsToMany
+//    {
+//        return $this->belongsToMany(UserAlphabetLetter::class);
+//    }
+
+    public function alphabetLetter(): BelongsToMany
+    {
+        return $this->belongsToMany(AlphabetLetter::class, 'user_alphabet_letter', 'user_id', 'alphabet_letter_id');
+    }
 }

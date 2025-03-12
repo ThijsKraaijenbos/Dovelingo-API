@@ -29,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_alphabet');
+        Schema::dropIfExists('user_alphabet_letters');
     }
 };
+

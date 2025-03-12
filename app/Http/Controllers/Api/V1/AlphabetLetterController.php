@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\AlphabetLetter;
+use App\Models\User;
+use App\Models\UserAlphabetLetter;
 use Illuminate\Http\Request;
 
 class AlphabetLetterController extends Controller
@@ -17,26 +19,28 @@ class AlphabetLetterController extends Controller
         return response()->json($alphabetLetters);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getUserAlphabetLetters(Request $request)
     {
-        //
+        $request->validate([
+            'token' => 'required|string',
+        ]);
+
+        $user = User::where('sso_token', $request->query('token'))->first();
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $alphabetLetters = UserAlphabetLetter::where('user_id', $user->id)
+            ->with('alphabetLetter')
+            ->get();
+
+        return response()->json($alphabetLetters);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(AlphabetLetter $alphabetLetter)
     {
         //
     }

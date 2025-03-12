@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/gifs',[GifsController::class, 'getData']);
         Route::get('/alphabet-letters', [AlphabetLetterController::class, 'index']);
 
+        Route::get('/user/alphabet-letters', [AlphabetLetterController::class, 'getUserAlphabetLetters']);
+
         Route::get('/user-alphabet-letters', [UserAlphabetLetterController::class, 'index']);
         Route::post('/user-alphabet-letters', [UserAlphabetLetterController::class, 'store']);
         Route::patch('/user-alphabet-letters', [UserAlphabetLetterController::class, 'update']);
