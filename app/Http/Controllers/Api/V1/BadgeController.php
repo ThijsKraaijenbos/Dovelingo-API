@@ -71,4 +71,14 @@ class BadgeController extends Controller
         ]);
     }
 
+    public function getAllBadges(){
+        $badges = Badge::all();
+
+        $badges->transform(function ($badge) {
+            $badge->image_url = env('APP_URL') . '/storage/' . $badge->image_url;
+            return $badge;
+        });
+        return response()->json($badges);
+    }
+
 }

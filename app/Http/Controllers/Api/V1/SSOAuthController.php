@@ -42,10 +42,6 @@ class SSOAuthController extends Controller
             dd("Created User", $user);
         }
 
-//        return redirect()
-//            ->to($formattedUrl)
-//            ->withHeaders([
-//                'sso_token' => $requestData['token'],
-//            ]);
+        return redirect()->to($formattedUrl . '?sso_token=' . urlencode($requestData['token']));
     }
 }
