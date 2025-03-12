@@ -57,21 +57,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Badge::class, 'user_badges', 'user_id', 'badge_id');
     }
 
-    public function userWord(): BelongsToMany
-    {
-        return $this->belongsToMany(UserWord::class);
-    }
-
-    public function userFillInTheBlanks(): BelongsToMany
-    {
-        return $this->belongsToMany(UserFillInTheBlanks::class);
-    }
-
-    public function userSentenceBuilding(): BelongsToMany
-    {
-        return $this->belongsToMany(UserSentenceBuilding::class);
-    }
-
     public function alphabetLetter(): BelongsToMany
     {
         return $this->belongsToMany(AlphabetLetter::class, 'user_alphabet_letters', 'user_id', 'alphabet_letter_id');
@@ -80,5 +65,15 @@ class User extends Authenticatable
     public function word(): BelongsToMany
     {
         return $this->belongsToMany(Word::class, 'user_words', 'user_id', 'word_id');
+    }
+
+    public function fillInTheBlanks(): BelongsToMany
+    {
+        return $this->belongsToMany(FillInTheBlanks::class, 'user_fill_in_the_blanks', 'user_id', 'fill_in_the_blanks_id');
+    }
+
+    public function sentenceBuilding(): BelongsToMany
+    {
+        return $this->belongsToMany(SentenceBuilding::class, 'user_sentence_building', 'user_id', 'sentence_building_id');
     }
 }

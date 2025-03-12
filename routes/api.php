@@ -5,10 +5,6 @@ use App\Http\Controllers\Api\V1\BadgeController;
 use App\Http\Controllers\Api\V1\ExerciseController;
 use App\Http\Controllers\Api\V1\LessonController;
 use App\Http\Controllers\Api\V1\SSOAuthController;
-use App\Http\Controllers\Api\V1\UserAlphabetLetterController;
-use App\Http\Controllers\Api\V1\UserFillInTheBlanksController;
-use App\Http\Controllers\Api\V1\UserSentenceBuildingController;
-use App\Http\Controllers\Api\V1\UserWordController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\Api\V1\FillInTheBlanksController;
 use App\Http\Controllers\Api\V1\GifsController;
@@ -51,13 +47,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/user/words', [WordsController::class, 'storeUserWords']);
         Route::patch('/user/words', [WordsController::class, 'updateUserWords']);
 
-        Route::get('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'index']);
-        Route::post('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'store']);
-        Route::patch('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'update']);
+        Route::get('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'getUserFillInTheBlanks']);
+        Route::post('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'storeUserFillInTheBlank']);
+        Route::patch('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'updateUserFillInTheBlank']);
 
-        Route::get('/user/sentence-building', [UserSentenceBuildingController::class, 'index']);
-        Route::post('/user/sentence-building', [UserSentenceBuildingController::class, 'store']);
-        Route::patch('/user/sentence-building', [UserSentenceBuildingController::class, 'update']);
+        Route::get('/user/sentence-building', [SentenceBuildingController::class, 'getUserSentenceBuilding']);
+        Route::post('/user/sentence-building', [SentenceBuildingController::class, 'storeUserSentenceBuilding']);
+        Route::patch('/user/sentence-building', [SentenceBuildingController::class, 'updateUserSentenceBuilding']);
 
     });
 });
