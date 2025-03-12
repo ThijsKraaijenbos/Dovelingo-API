@@ -38,10 +38,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/sentence-building',[SentenceBuildingController::class, 'getData']);
         Route::get('/fill-in-the-blanks',[FillInTheBlanksController::class, 'getData']);
         Route::get('/gifs',[GifsController::class, 'getData']);
-        Route::get('/alphabet-letters', [AlphabetLetterController::class, 'index']);
+        Route::get('/alphabet-letters', [AlphabetLetterController::class, 'getData']);
 
         Route::get('/user/alphabet-letters', [AlphabetLetterController::class, 'getUserAlphabetLetters']);
         Route::post('/user/alphabet-letters', [AlphabetLetterController::class, 'storeUserAlphabetLetter']);
+        Route::patch('/user/alphabet-letters', [AlphabetLetterController::class, 'updateUserAlphabetLetter']);
 
         Route::get('/user/words', [WordsController::class, 'getUserWords']);
         Route::post('/user/words', [WordsController::class, 'storeUserWords']);

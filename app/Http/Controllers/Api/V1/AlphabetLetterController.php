@@ -10,10 +10,7 @@ use Illuminate\Http\Request;
 
 class AlphabetLetterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function getData()
     {
         $alphabetLetters = AlphabetLetter::all();
         return response()->json($alphabetLetters);
@@ -34,15 +31,17 @@ class AlphabetLetterController extends Controller
             ->with('alphabetLetter')
             ->get();
 
-        return response()->json($alphabetLetters);
+        if($alphabetLetters->isEmpty()) {
+            return response()->json(['This user has not made any alphabet letters exercises yet'], 404);
+        } else {
+            return response()->json($alphabetLetters);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function storeUserAlphabetLetter(Request $request)
     {
         $request->validate([
+            'token' => 'required|string',
             'alphabet_letter_id' => 'required|integer',
             'completed' => 'required|integer'
         ]);
@@ -60,35 +59,12 @@ class AlphabetLetterController extends Controller
                 'user_id' => $user->id,
                 'alphabet_letter_id' => $alphabetLetterId,
                 'completed' => $completed
-            ]);
+            ])->with('alphabetLetter')->get();
 //            return response()->json(['it exists']);
             return response()->json($userAlphabetLetter, status: 201);
         } else {
-            return response()->json("this word doesn't exist", status: 404);
+            return response()->json("This alphabet letter doesn't exist", status: 404);
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AlphabetLetter $alphabetLetter)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AlphabetLetter $alphabetLetter)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AlphabetLetter $alphabetLetter)
-    {
-        //
-    }
 }

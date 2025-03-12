@@ -16,13 +16,8 @@ class AlphabetLetter extends Model
         'letter',
     ];
 
-//    public function userAlphabetLetter(): HasMany
-//    {
-//        return $this->hasMany(UserAlphabetLetter::class);
-//    }
-
     public function user(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_alphabet_letters', 'user_id', 'alphabet_letter_id');
+        return $this->belongsToMany(User::class, 'user_alphabet_letters', 'alphabet_letter_id', 'user_id');
     }
 }

@@ -68,7 +68,7 @@ class WordsController extends Controller
                 'word_id' => $wordId,
                 'completed' => $completed
             ])->with('word')
-                ->get();;
+                ->get();
 
             return response()->json($userWord, status: 201);
         } else {

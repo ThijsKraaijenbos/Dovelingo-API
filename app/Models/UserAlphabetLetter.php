@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserAlphabetLetter extends Model
 {
-//    protected $table = 'user_alphabet_letters';
+    protected $table = 'user_alphabet_letters';
 
     protected $fillable = [
         'user_id',
@@ -17,11 +17,6 @@ class UserAlphabetLetter extends Model
 
     public function alphabetLetter(): BelongsTo
     {
-        return $this->belongsTo(AlphabetLetter::class, 'alphabet_letter_id');
+        return $this->belongsTo(AlphabetLetter::class);
     }
-
-//    public function user(): BelongsTo
-//    {
-//        return $this->belongsTo(User::class);
-//    }
 }
