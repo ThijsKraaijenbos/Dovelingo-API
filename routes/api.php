@@ -55,6 +55,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user/sentence-building', [SentenceBuildingController::class, 'getUserSentenceBuilding']);
         Route::post('/user/sentence-building', [SentenceBuildingController::class, 'storeUserSentenceBuilding']);
         Route::patch('/user/sentence-building', [SentenceBuildingController::class, 'updateUserSentenceBuilding']);
-
     });
 });

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\AlphabetLetter;
 use App\Models\User;
 use App\Models\UserAlphabetLetter;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AlphabetLetterController extends Controller
 {
@@ -71,6 +73,7 @@ class AlphabetLetterController extends Controller
         } else {
             return response()->json("This alphabet letter doesn't exist", status: 404);
         }
+
     }
 
     public function updateUserAlphabetLetter(Request $request)
@@ -86,7 +89,7 @@ class AlphabetLetterController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $userAlphabetLetterId = $request->user_word_id;
+        $userAlphabetLetterId = $request->user_alphabet_letter_id;
         $completed = $request->completed;
         $userAlphabetLetter = UserAlphabetLetter::where('id', $userAlphabetLetterId)->first();
 

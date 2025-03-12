@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('alphabet_letter_id');
-            $table->foreign('alphabet_letter_id')->references('id')->on('alphabet_letter')->onDelete('cascade');
+            $table->foreign('alphabet_letter_id')->references('id')->on('alphabet_letters')->onDelete('cascade');
             $table->boolean('completed');
             $table->timestamps();
         });
