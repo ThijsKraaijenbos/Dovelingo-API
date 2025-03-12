@@ -16,7 +16,7 @@ class AllowedUsersController extends Controller
         foreach ($emails as $email) {
             $email = trim($email);
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                AllowedUser::create(['email' => $email,'delete_at' => Carbon::now()->addMonths(6),]);
+                AllowedUser::create(['email' => $email,'delete_at' => Carbon::today()->addMonths(6),]);
             }
         }
         return redirect()->back()->with('success');
