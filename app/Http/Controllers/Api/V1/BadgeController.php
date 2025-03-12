@@ -75,7 +75,7 @@ class BadgeController extends Controller
         $badges = Badge::all();
 
         $badges->transform(function ($badge) {
-            $badge->img_url = env('APP_URL') . '/storage/' . $badge->image_url;
+            $badge->image_url = env('APP_URL') . '/storage/' . $badge->image_url;
             return $badge;
         });
         return response()->json($badges);
