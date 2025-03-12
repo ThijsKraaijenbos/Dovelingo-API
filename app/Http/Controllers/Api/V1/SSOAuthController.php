@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class SSOAuthController extends Controller
@@ -14,6 +15,12 @@ class SSOAuthController extends Controller
 
         //Format redirect back URL
         $formattedUrl = "http://" . $redirect;
+
+        $allowedUser = DB::table('allowed_users')->where('email', $requestData['email'])->exists();
+        if (!$allowedUser) {
+            return response()->json(['Deze gebruiker heeft geen toegang']);
+        }
+
 
         $user = User::where('email', $requestData['email'])->first();
         //If user already exists update user token
