@@ -14,6 +14,12 @@ class AlphabetLetterController extends Controller
     public function index()
     {
         $alphabetLetters = AlphabetLetter::all();
+
+        $alphabetLetters->transform(function ($letter) {
+            $letter->sign = env('APP_URL') . '/storage/' . $letter->sign;
+            return $letter;
+        });
+
         return response()->json($alphabetLetters);
     }
 
