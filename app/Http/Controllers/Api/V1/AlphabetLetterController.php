@@ -66,10 +66,38 @@ class AlphabetLetterController extends Controller
                 'alphabet_letter_id' => $alphabetLetterId,
                 'completed' => $completed
             ])->with('alphabetLetter')->get();
-//            return response()->json(['it exists']);
+
             return response()->json($userAlphabetLetter, status: 201);
         } else {
             return response()->json("This alphabet letter doesn't exist", status: 404);
+        }
+    }
+
+    public function updateUserAlphabetLetter(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|string',
+            'user_alphabet_letter_id' => 'required|integer',
+            'completed' => 'required|integer',
+        ]);
+
+        $user = User::where('sso_token', $request->query('token'))->first();
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $userAlphabetLetterId = $request->user_word_id;
+        $completed = $request->completed;
+        $userAlphabetLetter = UserAlphabetLetter::where('id', $userAlphabetLetterId)->first();
+
+        if(UserAlphabetLetter::where('id', $userAlphabetLetterId)->exists()) {
+            $userAlphabetLetter->update([
+                'completed' => $completed
+            ]);
+
+            return response()->json($userAlphabetLetter->with('alphabetLetter')->get(), status: 200);
+        } else {
+            return response()->json("This user hasn't made this exercise before", status: 404);
         }
     }
 
