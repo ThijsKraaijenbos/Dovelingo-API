@@ -40,9 +40,32 @@ class AlphabetLetterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeUserAlphabetLetter(Request $request)
     {
-        //
+        $request->validate([
+            'alphabet_letter_id' => 'required|integer',
+            'completed' => 'required|integer'
+        ]);
+
+        $user = User::where('sso_token', $request->query('token'))->first();
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $completed = $request->completed;
+        $alphabetLetterId = $request->alphabet_letter_id;
+
+        if(AlphabetLetter::where('id', $alphabetLetterId)->exists()) {
+            $userAlphabetLetter = UserAlphabetLetter::create([
+                'user_id' => $user->id,
+                'alphabet_letter_id' => $alphabetLetterId,
+                'completed' => $completed
+            ]);
+//            return response()->json(['it exists']);
+            return response()->json($userAlphabetLetter, status: 201);
+        } else {
+            return response()->json("this word doesn't exist", status: 404);
+        }
     }
 
     /**

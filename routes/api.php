@@ -45,22 +45,19 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/alphabet-letters', [AlphabetLetterController::class, 'index']);
 
         Route::get('/user/alphabet-letters', [AlphabetLetterController::class, 'getUserAlphabetLetters']);
+        Route::post('/user/alphabet-letters', [AlphabetLetterController::class, 'storeUserAlphabetLetter']);
 
-        Route::get('/user-alphabet-letters', [UserAlphabetLetterController::class, 'index']);
-        Route::post('/user-alphabet-letters', [UserAlphabetLetterController::class, 'store']);
-        Route::patch('/user-alphabet-letters', [UserAlphabetLetterController::class, 'update']);
+        Route::get('/user/words', [WordsController::class, 'getUserWords']);
+        Route::post('/user/words', [WordsController::class, 'storeUserWords']);
+        Route::patch('/user/words', [WordsController::class, 'updateUserWords']);
 
-        Route::get('/user-words', [UserWordController::class, 'index']);
-        Route::post('/user-words', [UserWordController::class, 'store']);
-        Route::patch('/user-words', [UserWordController::class, 'update']);
+        Route::get('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'index']);
+        Route::post('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'store']);
+        Route::patch('/user/fill-in-the-blanks', [UserFillInTheBlanksController::class, 'update']);
 
-        Route::get('/user-fill-in-the-blanks', [UserFillInTheBlanksController::class, 'index']);
-        Route::post('/user-fill-in-the-blanks', [UserFillInTheBlanksController::class, 'store']);
-        Route::patch('/user-fill-in-the-blanks', [UserFillInTheBlanksController::class, 'update']);
-
-        Route::get('/user-sentence-building', [UserSentenceBuildingController::class, 'index']);
-        Route::post('/user-sentence-building', [UserSentenceBuildingController::class, 'store']);
-        Route::patch('/user-sentence-building', [UserSentenceBuildingController::class, 'update']);
+        Route::get('/user/sentence-building', [UserSentenceBuildingController::class, 'index']);
+        Route::post('/user/sentence-building', [UserSentenceBuildingController::class, 'store']);
+        Route::patch('/user/sentence-building', [UserSentenceBuildingController::class, 'update']);
 
     });
 });
