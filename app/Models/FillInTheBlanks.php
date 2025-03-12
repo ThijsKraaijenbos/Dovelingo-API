@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class FillInTheBlanks extends Model
 {
     protected $table = 'fill_in_the_blanks';
+
     protected $fillable = [
         'full_sentence',
         'video_path',
@@ -21,8 +22,8 @@ class FillInTheBlanks extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-    public function userFillInTheBlanks(): BelongsToMany
+    public function users()
     {
-        return $this->belongsToMany(UserFillInTheBlanks::class);
+        return $this->belongsToMany(User::class, 'user_words', 'word_id', 'user_id');
     }
 }

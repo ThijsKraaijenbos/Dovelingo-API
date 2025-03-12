@@ -48,8 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/user/words', [WordsController::class, 'updateUserWords']);
 
         Route::get('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'getUserFillInTheBlanks']);
-        Route::post('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'storeUserFillInTheBlank']);
-        Route::patch('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'updateUserFillInTheBlank']);
+        Route::post('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'storeUserFillInTheBlanks']);
+        Route::patch('/user/fill-in-the-blanks', [FillInTheBlanksController::class, 'updateUserFillInTheBlanks']);
 
         Route::get('/user/sentence-building', [SentenceBuildingController::class, 'getUserSentenceBuilding']);
         Route::post('/user/sentence-building', [SentenceBuildingController::class, 'storeUserSentenceBuilding']);

@@ -20,9 +20,4 @@ class UserWord extends Model
     {
         return $this->belongsTo(Word::class);
     }
-
-//    public function user(): BelongsTo
-//    {
-//        return $this->belongsTo(User::class);
-//    }
 }

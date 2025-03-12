@@ -23,9 +23,4 @@ class Word extends Model
     {
         return $this->belongsToMany(User::class, 'user_words', 'word_id', 'user_id');
     }
-
-//    public function userWord(): BelongsToMany
-//    {
-//        return $this->belongsToMany(UserWord::class);
-//    }
 }

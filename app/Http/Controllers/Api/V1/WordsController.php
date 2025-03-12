@@ -39,7 +39,11 @@ class WordsController extends Controller
             ->with('word')
             ->get();
 
-        return response()->json($words);
+        if($words->isEmpty()) {
+            return response()->json(['error' => 'No data found'], 404);
+        } else {
+            return response()->json($words);
+        }
     }
 
     public function storeUserWords(Request $request)
