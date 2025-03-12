@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class FillInTheBlanks extends Model
 {
@@ -18,5 +19,10 @@ class FillInTheBlanks extends Model
     public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    public function userFillInTheBlanks(): BelongsToMany
+    {
+        return $this->belongsToMany(UserFillInTheBlanks::class);
     }
 }
