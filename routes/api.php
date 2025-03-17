@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AllowedUsersController;
 use App\Http\Controllers\Api\V1\AlphabetLetterController;
 use App\Http\Controllers\Api\V1\BadgeController;
 use App\Http\Controllers\Api\V1\ExerciseController;
@@ -55,5 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user/sentence-building', [SentenceBuildingController::class, 'getUserSentenceBuilding']);
         Route::post('/user/sentence-building', [SentenceBuildingController::class, 'storeUserSentenceBuilding']);
         Route::patch('/user/sentence-building', [SentenceBuildingController::class, 'updateUserSentenceBuilding']);
+
+        Route::post('/allowed-users', [AllowedUsersController::class, 'store']);
     });
 });

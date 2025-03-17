@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AllowedUsersController;
 use App\Http\Controllers\Api\ExercisesFiller;
+use App\Http\Controllers\Api\V1\AllowedUsersController;
 use App\Http\Controllers\Api\V1\LetterController;
 use App\Http\Controllers\Api\V1\TrophyController;
 use App\Http\Controllers\ApiAuthController;

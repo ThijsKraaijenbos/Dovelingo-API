@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Models\AllowedUser;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -11,7 +11,7 @@ class AllowedUsersController extends Controller
 {
     public function store(Request $request)
     {
-        $emails = explode(PHP_EOL, $request->input('emails'));
+        $emails = preg_split('/[\r\n]+/', trim($request->input('emails')));
 
         foreach ($emails as $email) {
             $email = trim($email);
@@ -19,6 +19,8 @@ class AllowedUsersController extends Controller
                 AllowedUser::create(['email' => $email,'delete_at' => Carbon::today()->addMonths(6),]);
             }
         }
-        return redirect()->back()->with('success');
+        return response()->json([
+            'message' => 'Emails opgeslagen',
+        ], 201);
     }
 }
