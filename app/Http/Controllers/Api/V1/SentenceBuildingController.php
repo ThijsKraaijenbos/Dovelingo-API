@@ -12,8 +12,13 @@ class SentenceBuildingController extends Controller
 {
     public function getData()
     {
-        $sentence = SentenceBuilding::all();
-        return response()->json($sentence);
+        $sentences = SentenceBuilding::all();
+
+        $sentences->transform(function ($sentence) {
+            $sentence->video_path = env('APP_URL') . '/storage/' . $sentence->video_path;
+            return $sentence;
+        });
+        return response()->json($sentences);
     }
 
     public function getUserSentenceBuilding(Request $request)
