@@ -14,7 +14,10 @@ return new class extends Migration
     {
         DB::statement('PRAGMA foreign_keys = OFF;');
 
-        Schema::create('users_temp', function (Blueprint $table){
+        // Drop the existing users table before creating the new one
+        Schema::dropIfExists('users');
+
+        Schema::create('users', function (Blueprint $table){
             $table->id();
             $table->string('display_name')->unique();
             $table->string('full_name');
@@ -27,13 +30,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement('INSERT INTO users_temp (id, display_name, full_name, email, sso_token, email_verified_at, role, score, created_at, updated_at)
-                        SELECT id, display_name, full_name, email, sso_token, email_verified_at, role, score, created_at, updated_at
-                        FROM users');
-
-        Schema::dropIfExists('users');
-
-        Schema::rename('users_temp', 'users');
+        Schema::dropIfExists('users_temp');
 
         DB::statement('PRAGMA foreign_keys = ON;');
     }
@@ -43,6 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('users_temp');
+        Schema::dropIfExists('users');
     }
 };
