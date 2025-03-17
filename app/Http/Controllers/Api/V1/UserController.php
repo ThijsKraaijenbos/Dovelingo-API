@@ -11,62 +11,34 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getUsers(Request $request)
     {
-        //        Example code to return an example version of the Exercises table
-//        Make sure there's a model for it and a migration of course
+        $ssoToken = $request->token;
+        if ($ssoToken) {
+            $user = User::Where('sso_token', $ssoToken)->first();
+            return response()->json($user, 200);
+        }
+
         $users = User::all();
-        return response()->json([
-//            'collection' => $exercises
-            'collection' => $users
+        return response()->json($users, 200);
+    }
+
+    public function updateUser(Request $request)
+    {
+        $request->validate([
+            'display_name' => 'required|string'
         ]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $ssoToken = $request->token;
+        $user = User::Where('sso_token', $ssoToken)->get()->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
+        $user->display_name = $request->display_name;
+        $user->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        return response()->json($user, 200);
     }
 }

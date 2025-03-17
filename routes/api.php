@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\SSOAuthController;
 use App\Http\Controllers\Api\V1\FillInTheBlanksController;
 use App\Http\Controllers\Api\V1\GifsController;
 use App\Http\Controllers\Api\V1\SentenceBuildingController;
+use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\WordsController;
 use App\Models\UserAlphabetLetter;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('/exercises', [ExerciseController::class, 'index']);
         Route::post('/update-points', [BadgeController::class, 'updatePoints']);
+
+        Route::get('/users', [UserController::class, 'getUsers']);
+        Route::post('/users', [UserController::class, 'updateUser']);
 
         Route::get('/user/badges', [BadgeController::class, 'getUserBadges']);
         Route::get('/badges', [BadgeController::class, 'getAllBadges']);
