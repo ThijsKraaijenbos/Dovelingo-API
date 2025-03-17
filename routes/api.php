@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\V1\BadgeController;
 use App\Http\Controllers\Api\V1\ExerciseController;
 use App\Http\Controllers\Api\V1\LessonController;
 use App\Http\Controllers\Api\V1\SSOAuthController;
-use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\Api\V1\FillInTheBlanksController;
 use App\Http\Controllers\Api\V1\GifsController;
 use App\Http\Controllers\Api\V1\SentenceBuildingController;
