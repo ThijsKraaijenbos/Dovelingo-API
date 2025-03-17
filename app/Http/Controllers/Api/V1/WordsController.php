@@ -19,7 +19,7 @@ class WordsController extends Controller
             $words = Word::all();
 
             $words->transform(function ($word) {
-                $word->gif_path = env('APP_URL') . '/storage/' . $word->gif_path;
+                $word->video_path = env('APP_URL') . '/storage/' . $word->video_path;
                 return $word;
             });
 
@@ -28,7 +28,7 @@ class WordsController extends Controller
         } else {
             $word = Word::where('lesson_id', $lesson_id)->get();
             $word->transform(function ($word) {
-                $word->gif_path = env('APP_URL') . '/storage/' . $word->gif_path;
+                $word->video_path = env('APP_URL') . '/storage/' . $word->video_path;
                 return $word;
             });
 

@@ -15,7 +15,7 @@ class FillInTheBlanksController extends Controller
         $fillInTheBlanks = FillInTheBlanks::all();
 
         $fillInTheBlanks->transform(function ($singleFillInTheBlanks) {
-            $singleFillInTheBlanks->image_url = env('APP_URL') . '/storage/' . $singleFillInTheBlanks->sign;
+            $singleFillInTheBlanks->video_path = env('APP_URL') . '/storage/' . $singleFillInTheBlanks->video_path;
             return $singleFillInTheBlanks;
         });
 
