@@ -17,7 +17,8 @@ class SSOAuthController extends Controller
 
         $allowedUser = DB::table('allowed_users')->where('email', $requestData['email'])->exists();
         if (!$allowedUser) {
-            return redirect()->to($formattedUrl . '?login_attempt=denied');
+            return redirect()->to("https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/".$formattedUrl);
+
         }
 
 
