@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\ApiUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ApiUserController extends Controller

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 
 class SSOAuthController extends Controller
 {
@@ -27,7 +26,7 @@ class SSOAuthController extends Controller
         if ($user && $user->sso_token !== $requestData['token']) {
             $user->sso_token = $requestData['token'];
             $user->save();
-            dd("Updated User", $user);
+
         }
 
         //If no user exists with this email, create a new user
@@ -46,7 +45,6 @@ class SSOAuthController extends Controller
                 'streak' => 0,
             ]);
 
-            dd("Created User", $user);
         }
 
         return redirect()->to($formattedUrl . '?sso_token=' . urlencode($requestData['token']));
