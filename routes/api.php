@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update-points', [V1BadgeController::class, 'updatePoints']);
 
         Route::get('/users', [V1UserController::class, 'getUsers']);
-        Route::post('/users', [V1UserController::class, 'updateUser']);
+        Route::patch('/users', [V1UserController::class, 'updateUser']);
 
         Route::get('/user/badges', [V1BadgeController::class, 'getUserBadges']);
         Route::get('/badges', [V1BadgeController::class, 'getAllBadges']);
