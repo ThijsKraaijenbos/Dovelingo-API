@@ -17,7 +17,7 @@ class SSOAuthController extends Controller
 
         $allowedUser = DB::table('allowed_users')->where('email', $requestData['email'])->exists();
         if (!$allowedUser) {
-            return redirect()->to('https://cmgt.hr.nl/chat-login/handle/tle2-1?error=unauthorized');
+            return redirect()->to('http://cmgt.hr.nl/chat-login/logout/'. $requestData['token'] . '?redirect=' . $formattedUrl);
         }
 
 
