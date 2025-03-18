@@ -3,7 +3,6 @@ use App\Http\Controllers\Api\V1\{
     AllowedUsersController as V1AllowedUsersController,
     AlphabetLetterController as V1AlphabetLetterController,
     BadgeController as V1BadgeController,
-    ExerciseController as V1ExerciseController,
     LessonController as V1LessonController,
     FillInTheBlanksController as V1FillInTheBlanksController,
     GifsController as V1GifsController,
@@ -25,7 +24,6 @@ Route::middleware(['cors', 'auth:sanctum'])->group(function () {
 
     //V1 API Routes
     Route::prefix('v1')->group(function () {
-        Route::get('/exercises', [V1ExerciseController::class, 'index']);
         Route::post('/update-points', [V1BadgeController::class, 'updatePoints']);
 
         Route::get('/users', [V1UserController::class, 'getUsers']);
