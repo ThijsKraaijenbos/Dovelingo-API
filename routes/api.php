@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/redirect-back-url/{redirect}/', [SSOAuthController::class, 'login'])->middleware(UpdateStreak::class);
 
 //Api Key middleware
-Route::middleware(['cors', 'auth:sanctum'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     //V1 API Routes
     Route::prefix('v1')->group(function () {
