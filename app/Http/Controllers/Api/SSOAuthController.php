@@ -17,7 +17,7 @@ class SSOAuthController extends Controller
 
         $allowedUser = DB::table('allowed_users')->where('email', $requestData['email'])->exists();
         if (!$allowedUser) {
-            return response()->json(['Deze gebruiker heeft geen toegang']);
+            return redirect()->to($formattedUrl . '?login_attempt_denied');
         }
 
 
