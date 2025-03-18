@@ -7,21 +7,11 @@ use App\Http\Controllers\Api\V1\{
     LessonController as V1LessonController,
     FillInTheBlanksController as V1FillInTheBlanksController,
     GifsController as V1GifsController,
+    UserController as V1UserController,
     SentenceBuildingController as V1SentenceBuildingController,
     WordsController as V1WordsController
 };
 
-use App\Http\Controllers\Api\V2\{
-    AllowedUsersController as V2AllowedUsersController,
-    AlphabetLetterController as V2AlphabetLetterController,
-    BadgeController as V2BadgeController,
-    ExerciseController as V2ExerciseController,
-    LessonController as V2LessonController,
-    FillInTheBlanksController as V2FillInTheBlanksController,
-    GifsController as V2GifsController,
-    SentenceBuildingController as V2SentenceBuildingController,
-    WordsController as V2WordsController
-};
 use App\Http\Controllers\Api\SSOAuthController;
 use App\Http\Middleware\UpdateStreak;
 use Illuminate\Support\Facades\Route;
@@ -31,15 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/redirect-back-url/{redirect}/', [SSOAuthController::class, 'login'])->middleware(UpdateStreak::class);
 
 //Api Key middleware
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['cors', 'auth:sanctum'])->group(function () {
 
     //V1 API Routes
     Route::prefix('v1')->group(function () {
         Route::get('/exercises', [V1ExerciseController::class, 'index']);
         Route::post('/update-points', [V1BadgeController::class, 'updatePoints']);
 
-        Route::get('/users', [UserController::class, 'getUsers']);
-        Route::post('/users', [UserController::class, 'updateUser']);
+        Route::get('/users', [V1UserController::class, 'getUsers']);
+        Route::post('/users', [V1UserController::class, 'updateUser']);
 
         Route::get('/user/badges', [V1BadgeController::class, 'getUserBadges']);
         Route::get('/badges', [V1BadgeController::class, 'getAllBadges']);
