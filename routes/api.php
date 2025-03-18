@@ -38,6 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/exercises', [V1ExerciseController::class, 'index']);
         Route::post('/update-points', [V1BadgeController::class, 'updatePoints']);
 
+        Route::get('/users', [UserController::class, 'getUsers']);
+        Route::post('/users', [UserController::class, 'updateUser']);
+
         Route::get('/user/badges', [V1BadgeController::class, 'getUserBadges']);
         Route::get('/badges', [V1BadgeController::class, 'getAllBadges']);
         Route::get('/lessons', [V1LessonController::class, 'index']);

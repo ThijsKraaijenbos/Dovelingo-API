@@ -26,7 +26,7 @@ class SSOAuthController extends Controller
         if ($user && $user->sso_token !== $requestData['token']) {
             $user->sso_token = $requestData['token'];
             $user->save();
-            dd("Updated User", $user);
+
         }
 
         //If no user exists with this email, create a new user
@@ -45,7 +45,6 @@ class SSOAuthController extends Controller
                 'streak' => 0,
             ]);
 
-            dd("Created User", $user);
         }
 
         return redirect()->to($formattedUrl . '?sso_token=' . urlencode($requestData['token']));
