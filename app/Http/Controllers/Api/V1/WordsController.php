@@ -8,7 +8,6 @@ use App\Models\UserAlphabetLetter;
 use App\Models\UserWord;
 use App\Models\Word;
 use Illuminate\Http\Request;
-//random commit to test something pls work
 class WordsController extends Controller
 {
     public function getData(Request $request)

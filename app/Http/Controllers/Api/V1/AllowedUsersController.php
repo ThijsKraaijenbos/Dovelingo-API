@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 
 class AllowedUsersController extends Controller
 {
+
     public function store(Request $request)
     {
         $emails = preg_split('/[\r\n]+/', trim($request->input('emails')));
