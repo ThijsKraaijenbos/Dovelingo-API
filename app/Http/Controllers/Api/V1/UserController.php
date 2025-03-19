@@ -26,7 +26,8 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $request->validate([
-            'display_name' => 'required|string'
+            'display_name' => 'string',
+            'role' => 'string'
         ]);
 
         $ssoToken = $request->token;
@@ -36,8 +37,14 @@ class UserController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $user->display_name = $request->display_name;
-        $user->save();
+        if ($request->display_name) {
+            $user->display_name = $request->display_name;
+            $user->save();
+        }
+        if ($request->role) {
+            $user->role = $request->role;
+            $user->save();
+        }
 
         return response()->json($user, 200);
     }
