@@ -1,0 +1,18 @@
+config:
+  target: "http://145.24.223.169/api/v1"  # Change to your API URL
+  phases:
+    - duration: 30  # Test duration (seconds)
+      arrivalRate: 30  # Number of requests per second
+  defaults:
+    headers:
+      Authorization: "Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042"  # Replace with your actual token
+      Content-Type: "application/json"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/users"
+      - get:
+          url: "/lessons"
+      - get:
+          url: "/words"
